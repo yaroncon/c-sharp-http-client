@@ -1,0 +1,132 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{064A9560-7590-42A9-9E33-1FC1689760B3}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CodeScales.Http.Tests.Server</RootNamespace>
+    <AssemblyName>CodeScales.Http.Tests.Server</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Web.Mobile" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SendMultipartPostRequest.htm" />
+    <Content Include="HttpMultipartPost200.aspx" />
+    <Content Include="HttpPost200.aspx" />
+    <Content Include="HttpGet200WithSetCookies.aspx" />
+    <Content Include="HttpGet302.aspx" />
+    <Content Include="HttpGet200.aspx" />
+    <Content Include="HttpRedirectTarget1.aspx" />
+    <Content Include="SendPostRequest.htm" />
+    <Content Include="Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HttpMultipartPost200.aspx.cs">
+      <DependentUpon>HttpMultipartPost200.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HttpMultipartPost200.aspx.designer.cs">
+      <DependentUpon>HttpMultipartPost200.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HttpPost200.aspx.cs">
+      <DependentUpon>HttpPost200.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HttpPost200.aspx.designer.cs">
+      <DependentUpon>HttpPost200.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HttpGet200WithSetCookies.aspx.cs">
+      <DependentUpon>HttpGet200WithSetCookies.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HttpGet200WithSetCookies.aspx.designer.cs">
+      <DependentUpon>HttpGet200WithSetCookies.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HttpGet302.aspx.cs">
+      <DependentUpon>HttpGet302.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HttpGet302.aspx.designer.cs">
+      <DependentUpon>HttpGet302.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HttpGet200.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>HttpGet200.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HttpGet200.aspx.designer.cs">
+      <DependentUpon>HttpGet200.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HttpRedirectTarget1.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>HttpRedirectTarget1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="HttpRedirectTarget1.aspx.designer.cs">
+      <DependentUpon>HttpRedirectTarget1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CodeScales.Http.Tests\CodeScales.Http.Tests.csproj">
+      <Project>{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}</Project>
+      <Name>CodeScales.Http.Tests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CodeScales.Http\CodeScales.Http.csproj">
+      <Project>{FC262E96-6275-4798-8181-D9001FB50541}</Project>
+      <Name>CodeScales.Http</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>1508</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
