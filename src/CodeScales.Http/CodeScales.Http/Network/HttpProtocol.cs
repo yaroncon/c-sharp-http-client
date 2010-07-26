@@ -86,7 +86,7 @@ namespace CodeScales.Http.Network
             return builder.ToString();
         }
 
-        internal static string AddPostParametersFile(string name, string fileName, string boundry)
+        internal static string AddPostParametersFile(string name, string fileName, string boundry, string contentType)
         {
             if (name == null)
             {
@@ -100,7 +100,7 @@ namespace CodeScales.Http.Network
             StringBuilder builder = new StringBuilder();
             string paramBoundry = "--" + boundry + "\r\n";
             string stringParam = "Content-Disposition: form-data; name=\"";
-            string paramEnd = "\"; filename=\"" + fileName + "\"\r\nContent-Type: application/octet-stream\r\n\r\n";
+            string paramEnd = "\"; filename=\"" + fileName + "\"\r\nContent-Type: " + contentType + "\r\n\r\n";
             builder.Append(paramBoundry);
             builder.Append(stringParam + name + paramEnd);
             return builder.ToString();

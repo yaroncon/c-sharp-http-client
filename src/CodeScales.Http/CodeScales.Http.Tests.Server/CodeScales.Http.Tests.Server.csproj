@@ -40,6 +40,7 @@
     <Reference Include="System.Web.Mobile" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AspNetUpload.aspx" />
     <Content Include="SendMultipartPostRequest.htm" />
     <Content Include="HttpMultipartPost200.aspx" />
     <Content Include="HttpPost200.aspx" />
@@ -51,6 +52,13 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AspNetUpload.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>AspNetUpload.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AspNetUpload.aspx.designer.cs">
+      <DependentUpon>AspNetUpload.aspx</DependentUpon>
+    </Compile>
     <Compile Include="HttpMultipartPost200.aspx.cs">
       <DependentUpon>HttpMultipartPost200.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

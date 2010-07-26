@@ -103,7 +103,75 @@ namespace CodeScales.Http.Tests
             Assert.AreEqual(md.ToString(), responseString);
             Assert.AreEqual(Constants.HTTP_MULTIPART_POST_200, response.RequestUri.AbsoluteUri);
             Console.Write(responseString);
+        }
 
+        [Test]
+        public void HttpPostWithFilesAndParameters2()
+        {
+            // this method sends a file and checks for the number of bytes recieved
+            HttpClient client = new HttpClient();
+            // client.SetProxy(new Uri(Constants.FIDDLER_DEFAULT_ADDRESS));
+            HttpPost postMethod = new HttpPost(new Uri(Constants.HTTP_MULTIPART_POST_200));
+
+            MultipartEntity multipartEntity = new MultipartEntity();
+
+            string fileName = "test2.doc";
+
+            FileInfo fi = new FileInfo(@"C:\Data\Workspaces\CodeScales\Temp\" + fileName);
+            FileBody fileBody1 = new FileBody("photo", fileName, fi);
+
+            multipartEntity.AddBody(fileBody1);
+            postMethod.Entity = multipartEntity;
+
+            StringBody stringBody1 = new StringBody(Encoding.ASCII, "param1", "value1");
+            multipartEntity.AddBody(stringBody1);
+            StringBody stringBody2 = new StringBody(Encoding.ASCII, "param2", "!#$^&*((<>");
+            multipartEntity.AddBody(stringBody2);
+
+            HttpResponse response = client.Execute(postMethod);
+
+            Assert.AreEqual(200, response.ResponseCode);
+            string responseString = EntityUtils.ToString(response.Entity);
+            MessageData md = new MessageData();
+            md.PostParameters.Add(new NameValuePair("param1", "value1"));
+            md.PostParameters.Add(new NameValuePair("param2", "!#$^&*((<>"));
+            md.Files.Add(new NameValuePair(fileName, fi.Length.ToString()));
+            Assert.AreEqual(md.ToString(), responseString);
+            Assert.AreEqual(Constants.HTTP_MULTIPART_POST_200, response.RequestUri.AbsoluteUri);
+            Console.Write(responseString);
+        }
+
+        [Test]
+        public void HttpPostWithFilesAndParameters3()
+        {
+            // this method sends a file and checks for the number of bytes recieved
+            HttpClient client = new HttpClient();
+            HttpPost postMethod = new HttpPost(new Uri("http://www.fiddler2.com/sandbox/FileForm.asp"));
+
+            MultipartEntity multipartEntity = new MultipartEntity();
+            postMethod.Entity = multipartEntity;
+
+            StringBody stringBody1 = new StringBody(Encoding.ASCII, "1", "1_");
+            multipartEntity.AddBody(stringBody1);
+
+            FileInfo fi = new FileInfo(@"C:\Data\Workspaces\CodeScales\Temp\logo.png");
+            FileBody fileBody1 = new FileBody("fileentry", "logo.png", fi);
+            multipartEntity.AddBody(fileBody1);
+
+            StringBody stringBody2 = new StringBody(Encoding.ASCII, "_charset_", "windows-1252");
+            multipartEntity.AddBody(stringBody2);
+
+            HttpResponse response = client.Execute(postMethod);
+
+            Assert.AreEqual(200, response.ResponseCode);
+            string responseString = EntityUtils.ToString(response.Entity);
+            MessageData md = new MessageData();
+            md.PostParameters.Add(new NameValuePair("param1", "value1"));
+            md.PostParameters.Add(new NameValuePair("param2", "!#$^&*((<>"));
+            md.Files.Add(new NameValuePair("logo.png", fi.Length.ToString()));
+            Assert.AreEqual(md.ToString(), responseString);
+            Assert.AreEqual(Constants.HTTP_MULTIPART_POST_200, response.RequestUri.AbsoluteUri);
+            Console.Write(responseString);
         }
     }
 }
