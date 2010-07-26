@@ -59,7 +59,14 @@ namespace CodeScales.Http.Entity.Mime
         public byte[] GetContent(string boundry)
         {
             List<byte> bytes = new List<byte>();
-            bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry)));
+            if (this.m_content.Length == 0)
+            {
+                bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry, "application/octet-stream")));
+            }
+            else
+            {
+                bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry, "image/png")));
+            }
             bytes.AddRange(this.m_content);
             bytes.AddRange(Encoding.ASCII.GetBytes("\r\n"));
             return bytes.ToArray();
