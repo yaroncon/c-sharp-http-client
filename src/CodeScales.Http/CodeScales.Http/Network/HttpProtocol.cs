@@ -108,7 +108,7 @@ namespace CodeScales.Http.Network
 
         internal static string AddPostParametersEnd(string boundry)
         {
-            return "--" + boundry + "--\r\n";            
+            return "--" + boundry + "--\r\n\r\n";            
         }
 
         public static Encoding GetEncoding(string contentType)

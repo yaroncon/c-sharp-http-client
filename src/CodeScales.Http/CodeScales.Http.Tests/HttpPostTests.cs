@@ -110,12 +110,11 @@ namespace CodeScales.Http.Tests
         {
             // this method sends a file and checks for the number of bytes recieved
             HttpClient client = new HttpClient();
-            // client.SetProxy(new Uri(Constants.FIDDLER_DEFAULT_ADDRESS));
             HttpPost postMethod = new HttpPost(new Uri(Constants.HTTP_MULTIPART_POST_200));
 
             MultipartEntity multipartEntity = new MultipartEntity();
 
-            string fileName = "test2.doc";
+            string fileName = "153990331.jpg";
 
             FileInfo fi = new FileInfo(@"C:\Data\Workspaces\CodeScales\Temp\" + fileName);
             FileBody fileBody1 = new FileBody("photo", fileName, fi);
@@ -146,16 +145,19 @@ namespace CodeScales.Http.Tests
         {
             // this method sends a file and checks for the number of bytes recieved
             HttpClient client = new HttpClient();
-            HttpPost postMethod = new HttpPost(new Uri("http://www.fiddler2.com/sandbox/FileForm.asp"));
+            string url = "http://www.fiddler2.com/sandbox/FileForm.asp";
+            HttpPost postMethod = new HttpPost(new Uri(url));
 
             MultipartEntity multipartEntity = new MultipartEntity();
             postMethod.Entity = multipartEntity;
 
+            string fileName = "153990331.jpg";
+
             StringBody stringBody1 = new StringBody(Encoding.ASCII, "1", "1_");
             multipartEntity.AddBody(stringBody1);
 
-            FileInfo fi = new FileInfo(@"C:\Data\Workspaces\CodeScales\Temp\logo.png");
-            FileBody fileBody1 = new FileBody("fileentry", "logo.png", fi);
+            FileInfo fi = new FileInfo(@"C:\Data\Workspaces\CodeScales\Temp\" + fileName);
+            FileBody fileBody1 = new FileBody("fileentry", fileName, fi);
             multipartEntity.AddBody(fileBody1);
 
             StringBody stringBody2 = new StringBody(Encoding.ASCII, "_charset_", "windows-1252");
@@ -165,12 +167,7 @@ namespace CodeScales.Http.Tests
 
             Assert.AreEqual(200, response.ResponseCode);
             string responseString = EntityUtils.ToString(response.Entity);
-            MessageData md = new MessageData();
-            md.PostParameters.Add(new NameValuePair("param1", "value1"));
-            md.PostParameters.Add(new NameValuePair("param2", "!#$^&*((<>"));
-            md.Files.Add(new NameValuePair("logo.png", fi.Length.ToString()));
-            Assert.AreEqual(md.ToString(), responseString);
-            Assert.AreEqual(Constants.HTTP_MULTIPART_POST_200, response.RequestUri.AbsoluteUri);
+            Assert.AreEqual(url, response.RequestUri.AbsoluteUri);
             Console.Write(responseString);
         }
     }

@@ -19,6 +19,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Net;
 using System.Net.Sockets;
+using System.Threading;
 
 using CodeScales.Http.Methods;
 using CodeScales.Http.Entity;
@@ -33,6 +34,7 @@ namespace CodeScales.Http.Network
         private Socket m_socket = null;
         private Uri m_proxy = null;
         private Uri m_uri = null;
+        private int m_timeout = 60 * 1000;
 
         internal HttpConnection(HttpConnectionFactory factory, Uri uri, Uri proxy)
         {
@@ -130,12 +132,83 @@ namespace CodeScales.Http.Network
             }
             byte[] header = Encoding.ASCII.GetBytes(GetRequestHeader(request).ToString());
             byte[] body = httpEntity.Content;
-            byte[] message = new byte[header.Length + body.Length];
-            header.CopyTo(message, 0);
-            body.CopyTo(message, header.Length);
+            
+            // first send the headers
+            Send(header, 0, header.Length, this.m_timeout);
+            
+            // then look for 100-continue response for no more than 2 seconds
+            int counter = 0;
+            bool expectContinue = false;
+            if (expectContinue)
+            {
+                // 2 seconds timeout for 100-continue
+                while (!(this.m_socket.Available > 0) && counter < 20)
+                {
+                    counter++;
+                    Thread.Sleep(100);
+                }
+                if (this.m_socket.Available > 0)
+                {
+                    // now read the 100-continue response
+                    HttpResponse response = ReceiveResponseHeader();
+                    if (response.ResponseCode != 100)
+                    {
+                        throw new HttpNetworkException("reponse returned before entity was sent, but it is not 100-continue");
+                    }
+                    // need to send the headers again after the 100-continue
+                    Send(header, 0, header.Length, this.m_timeout);
+                }
+            }
 
-            this.m_socket.Send(message);
+            byte[] message = body;   
+
+            int sendBufferSize = this.m_socket.SendBufferSize;
+            int size = (message.Length > sendBufferSize) ? sendBufferSize : message.Length;
+            for (int i = 0; i < message.Length; i = i + size)
+            {
+                int remaining = (size < (message.Length - i)) ? size : (message.Length - i);
+                Send(message, i, remaining, this.m_timeout);
+            }
+
+            counter = 0;
+            // wait another timeout period for the response to arrive.
+            while (!(this.m_socket.Available > 0) && counter < (this.m_timeout / 100))
+            {
+                counter++;
+                Thread.Sleep(100);
+            }
+            
         }
+
+        private void Send(byte[] buffer, int offset, int size, int timeout)
+        {
+            int startTickCount = Environment.TickCount;
+            int sent = 0;  // how many bytes is already sent
+            do
+            {
+                if (Environment.TickCount > startTickCount + timeout)
+                    throw new Exception("Timeout.");
+                try
+                {
+                    sent += this.m_socket.Send(buffer, offset + sent, size - sent, SocketFlags.None);
+                }
+                catch (SocketException ex)
+                {
+                    if (ex.SocketErrorCode == SocketError.WouldBlock ||
+                        ex.SocketErrorCode == SocketError.IOPending ||
+                        ex.SocketErrorCode == SocketError.NoBufferSpaceAvailable)
+                    {
+                        // socket buffer is probably full, wait and try again
+                        Thread.Sleep(30);
+                    }
+                    else
+                        throw ex;  // any serious error occurr
+                }
+            } while (sent < size);
+        }
+
+
+
 
         private StringBuilder GetRequestHeader(HttpRequest request)
         {
