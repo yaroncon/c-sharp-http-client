@@ -65,7 +65,7 @@ namespace CodeScales.Http.Entity.Mime
             }
             else
             {
-                bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry, "image/png")));
+                bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry, "image/jpeg")));
             }
             bytes.AddRange(this.m_content);
             bytes.AddRange(Encoding.ASCII.GetBytes("\r\n"));
