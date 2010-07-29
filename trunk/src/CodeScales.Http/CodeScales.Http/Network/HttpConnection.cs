@@ -23,6 +23,7 @@ using System.Threading;
 
 using CodeScales.Http.Methods;
 using CodeScales.Http.Entity;
+using CodeScales.Http.Protocol;
 
 namespace CodeScales.Http.Network
 {
@@ -104,8 +105,8 @@ namespace CodeScales.Http.Network
         {
             WebHeaderCollection headers = response.Headers;
 
-            if ((headers["Connection"] != null && headers["Connection"].ToLower() == "keep-alive") ||
-                (headers["Proxy-Connection"] != null && headers["Proxy-Connection"].ToLower() == "keep-alive"))
+            if ((headers[HTTP.CONN_DIRECTIVE] != null && headers[HTTP.CONN_DIRECTIVE].ToLower() == HTTP.CONN_KEEP_ALIVE) ||
+                (headers[HTTP.PROXY_CONN_DIRECTIVE] != null && headers[HTTP.PROXY_CONN_DIRECTIVE].ToLower() == HTTP.CONN_KEEP_ALIVE))
             {
                 return;
             }
@@ -291,7 +292,7 @@ namespace CodeScales.Http.Network
 
             string chunkedHeader = EntityUtils.GetTransferEncoding(response.Headers);
             if (chunkedHeader != null
-                && chunkedHeader.ToLower().Equals(EntityUtils.TRANSFER_ENCODING_CHUNKED))
+                && chunkedHeader.ToLower().Equals(HTTP.CHUNK_CODING))
             {
                 List<byte> byteBuffer = new List<byte>();
                 BasicHttpEntity httpEntity = new BasicHttpEntity();

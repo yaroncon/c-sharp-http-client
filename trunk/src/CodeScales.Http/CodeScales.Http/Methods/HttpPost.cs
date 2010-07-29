@@ -72,18 +72,18 @@ namespace CodeScales.Http.Methods
             {
                 if (base.Headers != null && this.m_entity != null)
                 {
-                    if (base.Headers["Content-Length"] == null
-                    || base.Headers["Content-Length"] == string.Empty)
+                    if (base.Headers[HTTP.CONTENT_LEN] == null
+                    || base.Headers[HTTP.CONTENT_LEN] == string.Empty)
                     {
-                        base.Headers["Content-Length"] = this.m_entity.ContentLength.ToString();
+                        base.Headers[HTTP.CONTENT_LEN] = this.m_entity.ContentLength.ToString();
                     }
 
-                    if (base.Headers["Content-Type"] == null
-                    || base.Headers["Content-Type"] == string.Empty)
+                    if (base.Headers[HTTP.CONTENT_TYPE] == null
+                    || base.Headers[HTTP.CONTENT_TYPE] == string.Empty)
                     {
-                        base.Headers["Content-Type"] = this.m_entity.ContentType;
+                        base.Headers[HTTP.CONTENT_TYPE] = this.m_entity.ContentType;
                     }
-                    base.Headers.Add("UserAgent", @"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
+                    base.Headers.Add(HTTP.USER_AGENT, @"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
                 }
                     
                 return base.Headers;

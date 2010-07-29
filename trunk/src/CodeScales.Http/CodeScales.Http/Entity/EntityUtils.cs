@@ -19,16 +19,12 @@ using System.Text;
 using System.Net;
 
 using CodeScales.Http.Network;
+using CodeScales.Http.Protocol;
 
 namespace CodeScales.Http.Entity
 {
     public class EntityUtils
-    {
-        public const string TRANSFER_ENCODING = "Transfer-Encoding";
-        public const string TRANSFER_ENCODING_CHUNKED = "chunked";
-        public const string CONTENT_TYPE = "Content-Type";
-        public const string CONTENT_LENGTH = "Content-Length";
-        
+    {        
         public static string ToString(HttpEntity entity)
         {
             if (entity != null
@@ -44,8 +40,8 @@ namespace CodeScales.Http.Entity
         {
 
             if (headers != null &&
-                headers[CONTENT_TYPE] != null)
-                return headers[CONTENT_TYPE];
+                headers[HTTP.CONTENT_TYPE] != null)
+                return headers[HTTP.CONTENT_TYPE];
             else
                 return null;
         
@@ -54,9 +50,9 @@ namespace CodeScales.Http.Entity
         public static int GetContentLength(WebHeaderCollection headers)
         {
             if (headers != null &&
-                    headers[CONTENT_LENGTH] != null)
+                    headers[HTTP.CONTENT_LEN] != null)
             {
-                return int.Parse(headers[CONTENT_LENGTH]);
+                return int.Parse(headers[HTTP.CONTENT_LEN]);
             }
             return 0;
         }
@@ -64,8 +60,8 @@ namespace CodeScales.Http.Entity
         public static string GetTransferEncoding(WebHeaderCollection headers)
         {
             if (headers != null &&
-                headers[TRANSFER_ENCODING] != null)
-                return headers[TRANSFER_ENCODING];
+                headers[HTTP.TRANSFER_ENCODING] != null)
+                return headers[HTTP.TRANSFER_ENCODING];
             else
                 return null;
         }
