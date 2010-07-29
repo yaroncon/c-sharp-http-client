@@ -122,6 +122,14 @@ namespace CodeScales.Http.Network
                 throw new HttpNetworkException("Socket is closed or not ready");
             }
             this.m_socket.Send(Encoding.ASCII.GetBytes(GetRequestHeader(request).ToString()));
+            
+            int counter = 0;
+            // wait another timeout period for the response to arrive.
+            while (!(this.m_socket.Available > 0) && counter < (this.m_timeout / 100))
+            {
+                counter++;
+                Thread.Sleep(100);
+            }
         }
                 
         public void SendRequestHeaderAndEntity(HttpRequest request, HttpEntity httpEntity)
