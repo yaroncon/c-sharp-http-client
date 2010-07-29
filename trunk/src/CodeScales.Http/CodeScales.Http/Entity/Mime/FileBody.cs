@@ -36,6 +36,13 @@ namespace CodeScales.Http.Entity.Mime
         private string m_name;
         private string m_fileName;
         private byte[] m_content;
+        private string m_mimeType;
+
+        public FileBody(string name, string fileName, FileInfo fileInfo, string mimeType)
+            : this(name, fileName, fileInfo)
+        {
+            this.m_mimeType = mimeType;
+        }
 
         public FileBody(string name, string fileName, FileInfo fileInfo)
         {
@@ -59,13 +66,13 @@ namespace CodeScales.Http.Entity.Mime
         public byte[] GetContent(string boundry)
         {
             List<byte> bytes = new List<byte>();
-            if (this.m_content.Length == 0)
+            if (this.m_content.Length == 0 || this.m_mimeType == null || this.m_mimeType.Equals(string.Empty))
             {
                 bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry, "application/octet-stream")));
             }
             else
             {
-                bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry, "image/jpeg")));
+                bytes.AddRange(Encoding.ASCII.GetBytes(HTTPProtocol.AddPostParametersFile(this.m_name, this.m_fileName, boundry, this.m_mimeType)));
             }
             bytes.AddRange(this.m_content);
             bytes.AddRange(Encoding.ASCII.GetBytes("\r\n"));

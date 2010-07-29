@@ -119,7 +119,7 @@ namespace CodeScales.Http.Tests
             string fileName = "big-text.txt";
 
             FileInfo fi = ResourceManager.GetResourceFileInfo(fileName);
-            FileBody fileBody1 = new FileBody("photo", fileName, fi);
+            FileBody fileBody1 = new FileBody("file", fileName, fi, "text/plain");
 
             multipartEntity.AddBody(fileBody1);
             postMethod.Entity = multipartEntity;
@@ -159,7 +159,7 @@ namespace CodeScales.Http.Tests
             multipartEntity.AddBody(stringBody1);
 
             FileInfo fi = ResourceManager.GetResourceFileInfo(fileName);
-            FileBody fileBody1 = new FileBody("fileentry", fileName, fi);
+            FileBody fileBody1 = new FileBody("fileentry", fileName, fi, "text/plain");
             multipartEntity.AddBody(fileBody1);
 
             StringBody stringBody2 = new StringBody(Encoding.ASCII, "_charset_", "windows-1252");
