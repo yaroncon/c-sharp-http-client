@@ -19,6 +19,7 @@ using System.Text;
 using System.Net;
 
 using CodeScales.Http.Entity;
+using CodeScales.Http.Protocol;
 
 namespace CodeScales.Http.Methods
 {
@@ -92,6 +93,18 @@ namespace CodeScales.Http.Methods
                 base.Headers = value;
             }
         }
-
+        
+        public bool ExpectContinue
+        {
+            get
+            {
+                if (base.Headers != null)
+                {
+                    return (base.Headers[HTTP.EXPECT_DIRECTIVE] != null
+                        && base.Headers[HTTP.EXPECT_DIRECTIVE].Equals(HTTP.EXPECT_CONTINUE));
+                }
+                else return false;
+            }
+        }
     }
 }
