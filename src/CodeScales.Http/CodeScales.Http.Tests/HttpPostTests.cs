@@ -25,6 +25,8 @@ using CodeScales.Http.Entity;
 using CodeScales.Http.Entity.Mime;
 using NUnit.Framework;
 
+using CodeScales.Http.Tests.resources;
+
 namespace CodeScales.Http.Tests
 {
     [TestFixture]
@@ -114,9 +116,9 @@ namespace CodeScales.Http.Tests
 
             MultipartEntity multipartEntity = new MultipartEntity();
 
-            string fileName = "153990331.jpg";
+            string fileName = "big-text.txt";
 
-            FileInfo fi = new FileInfo(@"C:\Data\Workspaces\CodeScales\Temp\" + fileName);
+            FileInfo fi = ResourceManager.GetResourceFileInfo(fileName);
             FileBody fileBody1 = new FileBody("photo", fileName, fi);
 
             multipartEntity.AddBody(fileBody1);
@@ -151,12 +153,12 @@ namespace CodeScales.Http.Tests
             MultipartEntity multipartEntity = new MultipartEntity();
             postMethod.Entity = multipartEntity;
 
-            string fileName = "153990331.jpg";
+            string fileName = "small-text.txt";
 
             StringBody stringBody1 = new StringBody(Encoding.ASCII, "1", "1_");
             multipartEntity.AddBody(stringBody1);
 
-            FileInfo fi = new FileInfo(@"C:\Data\Workspaces\CodeScales\Temp\" + fileName);
+            FileInfo fi = ResourceManager.GetResourceFileInfo(fileName);
             FileBody fileBody1 = new FileBody("fileentry", fileName, fi);
             multipartEntity.AddBody(fileBody1);
 

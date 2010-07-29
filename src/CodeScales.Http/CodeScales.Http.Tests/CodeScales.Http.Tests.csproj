@@ -41,6 +41,8 @@
     <Compile Include="MessageData.cs" />
     <Compile Include="NameValueColl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="resources\ResourceManager.cs">
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CodeScales.Http\CodeScales.Http.csproj">
@@ -49,7 +51,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="resources\logo.png" />
+    <EmbeddedResource Include="resources\big-text.txt" />
+    <EmbeddedResource Include="resources\logo.png" />
+    <EmbeddedResource Include="resources\small-text.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
