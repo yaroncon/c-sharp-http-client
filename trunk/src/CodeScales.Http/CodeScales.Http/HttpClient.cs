@@ -128,7 +128,7 @@ namespace CodeScales.Http
             if (request.GetType().GetInterface("HttpEntityEnclosingRequest") != null)
             {
                 HttpEntityEnclosingRequest heer = (HttpEntityEnclosingRequest)request;
-                connection.SendRequestHeaderAndEntity(request, heer.Entity);
+                connection.SendRequestHeaderAndEntity(request, heer.Entity, heer.ExpectContinue);
             }
             else
             {

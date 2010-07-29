@@ -132,7 +132,7 @@ namespace CodeScales.Http.Network
             }
         }
                 
-        public void SendRequestHeaderAndEntity(HttpRequest request, HttpEntity httpEntity)
+        public void SendRequestHeaderAndEntity(HttpRequest request, HttpEntity httpEntity, bool expectContinue)
         {
             if (!this.IsConnected())
             {
@@ -146,7 +146,6 @@ namespace CodeScales.Http.Network
             
             // then look for 100-continue response for no more than 2 seconds
             int counter = 0;
-            bool expectContinue = false;
             if (expectContinue)
             {
                 // 2 seconds timeout for 100-continue
@@ -163,8 +162,6 @@ namespace CodeScales.Http.Network
                     {
                         throw new HttpNetworkException("reponse returned before entity was sent, but it is not 100-continue");
                     }
-                    // need to send the headers again after the 100-continue
-                    Send(header, 0, header.Length, this.m_timeout);
                 }
             }
 

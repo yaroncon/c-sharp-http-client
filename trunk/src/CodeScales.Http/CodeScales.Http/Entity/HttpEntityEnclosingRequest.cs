@@ -22,5 +22,6 @@ namespace CodeScales.Http.Entity
     public interface HttpEntityEnclosingRequest
     {
         HttpEntity Entity { get; set;}
+        bool ExpectContinue { get; }
     }
 }
