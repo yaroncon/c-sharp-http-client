@@ -141,7 +141,7 @@ namespace CodeScales.Http
 
         private HttpResponse GetResponse(HttpConnection connection)
         {
-            HttpResponse response = connection.ReceiveResponseHeader();
+            HttpResponse response = connection.ReceiveResponseHeaders();
             m_cookieStore.ReadCookiesFromResponse(response);
             connection.ReceiveResponseEntity(response);
             
