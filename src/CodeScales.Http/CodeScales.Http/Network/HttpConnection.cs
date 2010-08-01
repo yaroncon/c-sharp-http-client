@@ -146,19 +146,14 @@ namespace CodeScales.Http.Network
             Send(header, 0, header.Length, this.m_timeout);
             
             // then look for 100-continue response for no more than 2 seconds
-            int counter = 0;
             if (expectContinue)
             {
                 // 2 seconds timeout for 100-continue
-                while (!(this.m_socket.Available > 0) && counter < 20)
-                {
-                    counter++;
-                    Thread.Sleep(100);
-                }
+                WaitForDataToArriveAtSocket(2 * 1000);
                 if (this.m_socket.Available > 0)
                 {
                     // now read the 100-continue response
-                    HttpResponse response = ReceiveResponseHeader();
+                    HttpResponse response = ReceiveResponseHeaders();
                     if (response.ResponseCode != 100)
                     {
                         throw new HttpNetworkException("reponse returned before entity was sent, but it is not 100-continue");
@@ -175,15 +170,18 @@ namespace CodeScales.Http.Network
                 int remaining = (size < (message.Length - i)) ? size : (message.Length - i);
                 Send(message, i, remaining, this.m_timeout);
             }
+            
+        }
 
-            counter = 0;
+        private void WaitForDataToArriveAtSocket(int timeout)
+        {
+            int counter = 0;
             // wait another timeout period for the response to arrive.
-            while (!(this.m_socket.Available > 0) && counter < (this.m_timeout / 100))
+            while (!(this.m_socket.Available > 0) && counter < (timeout / 100))
             {
                 counter++;
                 Thread.Sleep(100);
             }
-            
         }
 
         private void Send(byte[] buffer, int offset, int size, int timeout)
@@ -213,9 +211,6 @@ namespace CodeScales.Http.Network
             } while (sent < size);
         }
 
-
-
-
         private StringBuilder GetRequestHeader(HttpRequest request)
         {
             StringBuilder sb = new StringBuilder();
@@ -225,12 +220,15 @@ namespace CodeScales.Http.Network
             return sb;
         }
 
-        public HttpResponse ReceiveResponseHeader()
+        public HttpResponse ReceiveResponseHeaders()
         {
             if (!this.IsConnected())
             {
                 throw new HttpNetworkException("Socket is closed or not ready");
             }
+
+            WaitForDataToArriveAtSocket(this.m_timeout);
+
             HttpResponse httpResponse = new HttpResponse();
             httpResponse.RequestUri = this.Uri;
             string Header = "";
@@ -331,6 +329,8 @@ namespace CodeScales.Http.Network
 
         private string ReceiveLine()
         {
+            WaitForDataToArriveAtSocket(this.m_timeout);
+
             string line = string.Empty;
             byte[] bytes = new byte[10];
             while (this.m_socket.Receive(bytes, 0, 1, SocketFlags.None) > 0)
@@ -344,9 +344,9 @@ namespace CodeScales.Http.Network
 
         private List<byte> ReceiveBytes(long size)
         {
+            WaitForDataToArriveAtSocket(this.m_timeout);
 
             List<byte> byteBuffer = new List<byte>();
-
             int minSize = 10240;
             if (size < 10240)
             {
