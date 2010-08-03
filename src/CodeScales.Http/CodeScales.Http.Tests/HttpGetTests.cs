@@ -67,7 +67,7 @@ namespace CodeScales.Http.Tests
         public void HttpGetWithProxy()
         {
             HttpClient client = new HttpClient();
-            client.SetProxy(new Uri(Constants.FIDDLER_DEFAULT_ADDRESS));
+            client.Proxy = new Uri(Constants.FIDDLER_DEFAULT_ADDRESS);
             HttpGet getMethod = new HttpGet(new Uri(Constants.HTTP_GET_200));
             HttpResponse response = client.Execute(getMethod);
 
@@ -84,7 +84,7 @@ namespace CodeScales.Http.Tests
             // with SetMaxRedirects
             // make sure we are not redirected
             HttpClient client = new HttpClient();
-            client.SetMaxRedirects(0);
+            client.MaxRedirects = 0;
             HttpGet getMethod = new HttpGet(new Uri(Constants.HTTP_GET_200_WITH_SET_COOKIES));
             getMethod.Parameters.Add("cookie1", "value1");
             getMethod.Parameters.Add("cookie2", "value2");

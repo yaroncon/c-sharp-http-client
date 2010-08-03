@@ -32,14 +32,24 @@ namespace CodeScales.Http
         private Uri m_proxy = null;
         private int m_maxRedirects = 1;
 
-        public void SetProxy(Uri uri)
+        public Uri Proxy
         {
-            this.m_proxy = uri;
+            set
+            {
+                this.m_proxy = value;
+            }
         }
 
-        public void SetMaxRedirects(int maxRedirects)
+        public int MaxRedirects
         {
-            this.m_maxRedirects = maxRedirects;
+            set
+            {
+                this.m_maxRedirects = value;
+            }
+            get
+            {
+                return this.MaxRedirects;
+            }
         }
 
         public HttpResponse Execute(HttpRequest request)
