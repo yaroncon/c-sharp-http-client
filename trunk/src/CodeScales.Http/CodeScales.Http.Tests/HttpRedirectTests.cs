@@ -33,7 +33,7 @@ namespace CodeScales.Http.Tests
             // with SetMaxRedirects
             // make sure we are not redirected
             HttpClient client = new HttpClient();
-            client.SetMaxRedirects(0);
+            client.MaxRedirects = 0;
             HttpGet getMethod = new HttpGet(new Uri(Constants.HTTP_GET_302));
             HttpResponse response = client.Execute(getMethod);
 
@@ -56,7 +56,7 @@ namespace CodeScales.Http.Tests
             // with SetMaxRedirects
             // make sure we were redirected
             HttpClient client = new HttpClient();
-            client.SetMaxRedirects(1);
+            client.MaxRedirects = 1;
             HttpGet getMethod = new HttpGet(new Uri(Constants.HTTP_GET_302));
             HttpResponse response = client.Execute(getMethod);
             
