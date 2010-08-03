@@ -19,6 +19,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeScales.Http.Tests", "Co
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeScales.Http.Examples", "CodeScales.Http.Examples\CodeScales.Http.Examples.csproj", "{7479716F-061C-4751-8895-B405E8B6B4EE}"
+	ProjectSection(WebsiteProperties) = preProject
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.Debug = "False"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -41,6 +47,10 @@ Global
 		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7479716F-061C-4751-8895-B405E8B6B4EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7479716F-061C-4751-8895-B405E8B6B4EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7479716F-061C-4751-8895-B405E8B6B4EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7479716F-061C-4751-8895-B405E8B6B4EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
