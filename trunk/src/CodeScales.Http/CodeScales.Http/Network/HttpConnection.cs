@@ -354,10 +354,10 @@ namespace CodeScales.Http.Network
             }
             byte[] RecvBuffer = new byte[minSize];
             long nBytes, nTotalBytes = 0;
-
-
+            int RecvSize = minSize;
+            
             // loop to receive response buffer
-            while ((nBytes = this.m_socket.Receive(RecvBuffer, 0, minSize, SocketFlags.None)) > 0)
+            while ((nBytes = this.m_socket.Receive(RecvBuffer, 0, RecvSize, SocketFlags.None)) > 0)
             {
                 // increment total received bytes
                 nTotalBytes += nBytes;
@@ -379,6 +379,14 @@ namespace CodeScales.Http.Network
 
                 if (nTotalBytes >= size && size > 0)
                     break;
+                else
+                {
+                    long nBytesLeft = size - nTotalBytes;
+                    if (nBytesLeft < RecvSize)
+                    {
+                        RecvSize = (int)nBytesLeft;
+                    }
+                }
             }
             return byteBuffer;
         }
