@@ -22,7 +22,7 @@ namespace CodeScales.Http.Tests
     public class Constants
     {
         public const string HTTP_GET_200 = "http://localhost/CodeScales/HttpGet200.aspx";
-        public const string HTTP_GET_200_CODESCALES_COM = "http://www.codescales.com";
+        public const string HTTP_GET_200_CODESCALES_COM = "http://www.codescales.com/";
         public const string HTTP_GET_200_WITH_SET_COOKIES = "http://localhost/CodeScales/HttpGet200WithSetCookies.aspx";
         public const string HTTP_GET_302 = "http://localhost/CodeScales/HttpGet302.aspx";
         public const string HTTP_POST_200 = "http://localhost/CodeScales/HttpPost200.aspx";
