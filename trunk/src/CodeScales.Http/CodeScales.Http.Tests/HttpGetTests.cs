@@ -120,7 +120,23 @@ namespace CodeScales.Http.Tests
 
             Assert.AreEqual(200, response.ResponseCode);
             string responseString = EntityUtils.ToString(response.Entity);
-            Assert.AreEqual("http://sites.google.com/a/codescales.com/sites/system/app/pages/meta/domainWelcome", response.RequestUri.AbsoluteUri);
+            Assert.AreEqual(Constants.HTTP_GET_200_CODESCALES_COM, response.RequestUri.AbsoluteUri);
+            Console.Write(responseString);
+        }
+
+        [Test]
+        public void HttpGetWithChunkedResponse2()
+        {
+            // we use codescales.com that is hosted by google
+            // the google server always uses chunked transfer-encoding
+
+            HttpClient client = new HttpClient();
+            HttpGet getMethod = new HttpGet(new Uri("http://forums.photographyreview.com/showthread.php?t=68825"));
+            HttpResponse response = client.Execute(getMethod);
+
+            Assert.AreEqual(200, response.ResponseCode);
+            string responseString = EntityUtils.ToString(response.Entity);
+            Assert.AreEqual("http://forums.photographyreview.com/showthread.php?t=68825", response.RequestUri.AbsoluteUri);
             Console.Write(responseString);
         }
 
