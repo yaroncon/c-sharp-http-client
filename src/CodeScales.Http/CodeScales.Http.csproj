@@ -8,6 +8,12 @@
     <DisableAssetTargetFallback>true</DisableAssetTargetFallback>
     <DisableImplicitAssetTargetFallback>true</DisableImplicitAssetTargetFallback>
     <PackageTargetFallback>$(AssetTargetFallback);netstandard2.0;portable-net45+win8+wp8+wpa81;portable45-net45+win8+wpa81</PackageTargetFallback>
+    <Authors>CodeScales;LonghronShen</Authors>
+    <Company>Sprintor</Company>
+    <Description>CodeScales.Http for .NET Standard and .NET Framework 4.5.1.</Description>
+    <PackageProjectUrl>https://github.com/LonghronShen/c-sharp-http-client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LonghronShen/c-sharp-http-client</RepositoryUrl>
+    <PackageTags>CodeScales.Http,CodeScales,HttpClient,Java</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
