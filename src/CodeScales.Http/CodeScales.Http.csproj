@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <VersionPrefix>1.0.0</VersionPrefix>
+    <TargetFrameworks>netstandard2.0;net451</TargetFrameworks>
+    <AssemblyName>CodeScales.Http</AssemblyName>
+    <PackageId>CodeScales.Http</PackageId>
+    <DisableAssetTargetFallback>true</DisableAssetTargetFallback>
+    <DisableImplicitAssetTargetFallback>true</DisableImplicitAssetTargetFallback>
+    <PackageTargetFallback>$(AssetTargetFallback);netstandard2.0;portable-net45+win8+wp8+wpa81;portable45-net45+win8+wpa81</PackageTargetFallback>
+    <Authors>CodeScales;LonghronShen</Authors>
+    <Company>Sprintor</Company>
+    <Description>CodeScales.Http for .NET Standard and .NET Framework 4.5.1.</Description>
+    <PackageProjectUrl>https://github.com/LonghronShen/c-sharp-http-client</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/LonghronShen/c-sharp-http-client</RepositoryUrl>
+    <PackageTags>CodeScales.Http,CodeScales,HttpClient,Java</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+  </ItemGroup>
+
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
+    <DefineConstants>$(DefineConstants);NETCORE</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net451' ">
+    <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="Microsoft.CSharp" />
+  </ItemGroup>
+
+</Project>

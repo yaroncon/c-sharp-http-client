@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27421.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{11761F80-27BE-4C74-9335-2D605330814C}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{EAB0303A-AC11-4FD4-A003-E079EE98C455}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{6DC961BF-4C22-4CCB-8397-B557A4409CA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeScales.Http", "src\CodeScales.Http\CodeScales.Http.csproj", "{FC262E96-6275-4798-8181-D9001FB50541}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeScales.Http.Tests", "test\CodeScales.Http.Tests\CodeScales.Http.Tests.csproj", "{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeScales.Http.Tests.Server", "test\CodeScales.Http.Tests.Server\CodeScales.Http.Tests.Server.csproj", "{064A9560-7590-42A9-9E33-1FC1689760B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeScales.Http.Examples", "src\CodeScales.Http.Examples\CodeScales.Http.Examples.csproj", "{B25ADF75-1688-457B-98F0-FFEEA803B94A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FC262E96-6275-4798-8181-D9001FB50541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC262E96-6275-4798-8181-D9001FB50541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC262E96-6275-4798-8181-D9001FB50541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC262E96-6275-4798-8181-D9001FB50541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{064A9560-7590-42A9-9E33-1FC1689760B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{064A9560-7590-42A9-9E33-1FC1689760B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{064A9560-7590-42A9-9E33-1FC1689760B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{064A9560-7590-42A9-9E33-1FC1689760B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B25ADF75-1688-457B-98F0-FFEEA803B94A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B25ADF75-1688-457B-98F0-FFEEA803B94A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B25ADF75-1688-457B-98F0-FFEEA803B94A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B25ADF75-1688-457B-98F0-FFEEA803B94A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FC262E96-6275-4798-8181-D9001FB50541} = {EAB0303A-AC11-4FD4-A003-E079EE98C455}
+		{AADEA75C-2370-4C6E-A704-FEA3E11A8EAB} = {6DC961BF-4C22-4CCB-8397-B557A4409CA8}
+		{064A9560-7590-42A9-9E33-1FC1689760B3} = {6DC961BF-4C22-4CCB-8397-B557A4409CA8}
+		{B25ADF75-1688-457B-98F0-FFEEA803B94A} = {EAB0303A-AC11-4FD4-A003-E079EE98C455}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {97529644-506F-42B5-9271-19CFB3093B2A}
+	EndGlobalSection
+	GlobalSection(SubversionScc) = preSolution
+		Svn-Managed = True
+		Manager = AnkhSVN - Subversion Support for Visual Studio
+	EndGlobalSection
+EndGlobal
